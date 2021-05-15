@@ -28,13 +28,13 @@ jobs:
           required-ros-distributions: foxy
       - name: Creating mock meshes and texture directory in nao_description
         run: |
-          mkdir -p ros_ws/src/nao/nao_description/meshes
-          mkdir -p ros_ws/src/nao/nao_description/texture
+          mkdir -p src/nao/nao_description/meshes
+          mkdir -p src/nao/nao_description/texture
           ls
           pwd
       - uses: ros-tooling/action-ros-ci@v0.2
         with:
-          package-name: nao_interfaces
+          package-name: nao_description
           target-ros2-distro: foxy
           vcs-repo-file-url: dependencies.repos
       - name: Creating mock meshes and texture directory in nao_description
