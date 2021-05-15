@@ -24,8 +24,8 @@ jobs:
     steps:
       - name: Creating mock meshes and texture directory in nao_description
         run: |
-          mkdir nao_description/meshes
-          mkdir nao_description/texture
+          mkdir -p nao_description/meshes
+          mkdir -p nao_description/texture
           ls
           pwd
       - uses: actions/checkout@v2
