@@ -40,5 +40,5 @@ jobs:
       - name: Creating mock meshes and texture directory in nao_description
         run: |
           pwd
-          ls
-          ls ros_ws/
+          ls ros_ws/src/nao/
+          ls ros_ws/src/nao_description/
