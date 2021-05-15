@@ -28,7 +28,7 @@ jobs:
           required-ros-distributions: foxy
       - uses: ros-tooling/action-ros-ci@v0.2
         with:
-          package-name: nao_description nao_state_publisher
+          package-name: nao_state_publisher # nao_description
           target-ros2-distro: foxy
           vcs-repo-file-url: dependencies.repos
       - name: Creating mock meshes and texture directory in nao_description
