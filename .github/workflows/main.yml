@@ -20,15 +20,16 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    # Enable flag to ignore the absence of the meshes and texture directories, used in nao_description's CMakeLists.txt
+    env:
+      IGNORE_MESHES_AND_TEXTURE_DIRS: 1
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
       - uses: ros-tooling/setup-ros@v0.1
         with:
           required-ros-distributions: foxy
-      - name: Enable flag to ignore meshes and texture dirs, used in nao_description's CMakeLists.txt
-        run: |
-          export IGNORE_MESHES_AND_TEXTURE_DIRS=1
       - uses: ros-tooling/action-ros-ci@v0.2
         with:
           package-name: nao_description nao_state_publisher
