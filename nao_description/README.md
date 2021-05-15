@@ -11,17 +11,11 @@ To install the 3d model meshes for the NAO, in this nao_description package dire
     mv -t ../  meshes/ texture/
     cd ../ && rm -rf tmp/
 
-## Running
-
-To visualise the urdf robot in rviz, run
-
-`ros2 launch nao_description everything_launch.py`
-
 ## Environment
 
 Tested for ROS2 FOXY, on Ubuntu 20.04
 
-## Using in another launch file
+## Using in a launch file
 
     file_path = os.path.join(
         get_package_share_directory('nao_description'),

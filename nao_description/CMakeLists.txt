@@ -4,10 +4,8 @@ project(nao_description)
 # find dependencies
 find_package(ament_cmake REQUIRED)
 
-foreach(dir urdf launch rviz)
-  install(DIRECTORY ${dir}/
-    DESTINATION share/${PROJECT_NAME}/${dir}/)
-endforeach()
+install(DIRECTORY urdf/
+  DESTINATION share/${PROJECT_NAME}/urdf/)
 
 # Use IGNORE_MESHES_AND_TEXTURE_DIRS flag to ignore these directories when using Github Actions CI
 if("$ENV{IGNORE_MESHES_AND_TEXTURE_DIRS}" STREQUAL "")

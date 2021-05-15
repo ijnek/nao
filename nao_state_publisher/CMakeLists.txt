@@ -30,6 +30,9 @@ ament_target_dependencies(nao_state_publisher
 install(TARGETS nao_state_publisher
   DESTINATION lib/${PROJECT_NAME})
 
+install(DIRECTORY launch/
+  DESTINATION share/${PROJECT_NAME}/launch/)
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   ament_lint_auto_find_test_dependencies()
