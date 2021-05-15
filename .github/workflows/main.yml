@@ -22,13 +22,13 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - uses: actions/checkout@v2
       - name: Creating mock meshes and texture directory in nao_description
         run: |
           mkdir -p nao_description/meshes
           mkdir -p nao_description/texture
           ls
           pwd
-      - uses: actions/checkout@v2
       - uses: ros-tooling/setup-ros@v0.1
         with:
           required-ros-distributions: foxy
