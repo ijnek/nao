@@ -33,7 +33,7 @@ foreach(dir urdf launch rviz)
 endforeach()
 
 # Use IGNORE_MESHES_AND_TEXTURE_DIRS flag to ignore these directories when using Github Actions CI
-if ("$ENV{IGNORE_MESHES_AND_TEXTURE_DIRS}" STREQUAL "")
+if("$ENV{IGNORE_MESHES_AND_TEXTURE_DIRS}" STREQUAL "")
   if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/meshes)
     message(FATAL_ERROR "Missing meshes directory, please follow instructions in README.md to install meshes")
   endif()
