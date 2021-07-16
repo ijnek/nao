@@ -57,7 +57,7 @@ public:
   : robot_state_publisher::RobotStatePublisher(rclcpp::NodeOptions())
   {
     subscriber_ = this->create_subscription<nao_sensor_msgs::msg::JointPositions>(
-      "sensors/joints", 10, std::bind(
+      "sensors/joint_positions", 10, std::bind(
         &NaoStatePublisher::callbackNaoJoints, this,
         std::placeholders::_1));
   }
