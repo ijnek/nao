@@ -18,13 +18,13 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(nao_interfaces REQUIRED)
+find_package(nao_sensor_msgs REQUIRED)
 find_package(robot_state_publisher REQUIRED)
 
 add_executable(nao_state_publisher src/nao_state_publisher.cpp)
 ament_target_dependencies(nao_state_publisher
   rclcpp
-  nao_interfaces
+  nao_sensor_msgs
   robot_state_publisher)
 
 install(TARGETS nao_state_publisher

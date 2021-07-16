@@ -19,7 +19,8 @@
 #include <utility>
 #include "robot_state_publisher/robot_state_publisher.hpp"
 #include "rclcpp/rclcpp.hpp"
-#include "nao_interfaces/msg/joints.hpp"
+#include "nao_sensor_msgs/msg/joint_positions.hpp"
+#include "nao_sensor_msgs/msg/joint_indexes.hpp"
 
 std::vector<std::string> joint_names = {
   "HeadYaw",
@@ -55,18 +56,18 @@ public:
   NaoStatePublisher()
   : robot_state_publisher::RobotStatePublisher(rclcpp::NodeOptions())
   {
-    subscriber_ = this->create_subscription<nao_interfaces::msg::Joints>(
+    subscriber_ = this->create_subscription<nao_sensor_msgs::msg::JointPositions>(
       "sensors/joints", 10, std::bind(
         &NaoStatePublisher::callbackNaoJoints, this,
         std::placeholders::_1));
   }
 
 private:
-  void callbackNaoJoints(const nao_interfaces::msg::Joints::SharedPtr sensor_joints)
+  void callbackNaoJoints(const nao_sensor_msgs::msg::JointPositions::SharedPtr sensor_joints)
   {
     std::map<std::string, double> joint_positions;
-    for (unsigned i = 0; i < nao_interfaces::msg::Joints::NUMJOINTS; ++i) {
-      joint_positions.insert({joint_names[i], sensor_joints->angles[i]});
+    for (unsigned i = 0; i < nao_sensor_msgs::msg::JointIndexes::NUMJOINTS; ++i) {
+      joint_positions.insert({joint_names[i], sensor_joints->positions[i]});
     }
 
     // ensure mimic joints are mimiced (see robot_state_publisher.cpp for more info)
@@ -81,7 +82,7 @@ private:
     publishTransforms(joint_positions, now());
   }
 
-  rclcpp::Subscription<nao_interfaces::msg::Joints>::SharedPtr subscriber_;
+  rclcpp::Subscription<nao_sensor_msgs::msg::JointPositions>::SharedPtr subscriber_;
 };
 
 int main(int argc, char * argv[])
