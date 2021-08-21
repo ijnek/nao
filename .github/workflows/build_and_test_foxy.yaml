@@ -11,6 +11,10 @@ on:
   # Triggers the workflow on pull requests
   pull_request:
     branches: [ rolling ]
+  
+  # Scheduled for a nightly
+  schedule:
+    - cron:  '14 22 * * *'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
