@@ -11,10 +11,6 @@ To install the 3d model meshes for the NAO, in this nao_description package dire
     mv -t ../  meshes/ texture/
     cd ../ && rm -rf tmp/
 
-## Environment
-
-Tested for ROS2 FOXY, on Ubuntu 20.04
-
 ## Using in a launch file
 
     file_path = os.path.join(
