@@ -2,14 +2,12 @@
 
 ## Setup
 
-To install the 3d model meshes for the NAO, in this nao_description package directory,
+To install the 3d model meshes for the NAO, from your ROS workspace, run:
 
-    mkdir tmp && cd tmp
-    wget https://github.com/ros-naoqi/nao_meshes_installer/raw/master/naomeshes-0.6.7-linux-x64-installer.run
-    chmod +x naomeshes-0.6.7-linux-x64-installer.run && ./naomeshes-0.6.7-linux-x64-installer.run  --prefix .
-    *Follow instructions, don't change the install directory*
-    mv -t ../  meshes/ texture/
-    cd ../ && rm -rf tmp/
+
+    ./src/nao/nao_description/install.sh
+
+and step through the installation wizard.
 
 ## Using in a launch file
 

@@ -10,11 +10,11 @@ install(DIRECTORY urdf/
 # Use IGNORE_MESHES_AND_TEXTURE_DIRS flag to ignore these directories when using Github Actions CI
 if("$ENV{IGNORE_MESHES_AND_TEXTURE_DIRS}" STREQUAL "")
   if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/meshes)
-    message(FATAL_ERROR "Missing meshes directory, please follow instructions in README.md to install meshes")
+    message(FATAL_ERROR "Manual installation of meshes is required. Please run ./src/nao/nao_description/install.sh in your workspace, and follow installation instructions.")
   endif()
 
   if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/texture)
-    message(FATAL_ERROR "missing texture directory, please follow instructions in README.md to install texture")
+    message(FATAL_ERROR "Manual installation of textures is required. Please run ./src/nao/nao_description/install.sh in your workspace, and follow installation instructions.")
   endif()
 
   foreach(dir meshes texture)
