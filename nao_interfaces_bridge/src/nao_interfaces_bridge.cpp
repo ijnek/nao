@@ -25,18 +25,20 @@ using sensor_msgs::msg::Imu;
 NaoInterfacesBridge::NaoInterfacesBridge(const rclcpp::NodeOptions & options)
 : rclcpp::Node{"nao_interfaces_bridge", options}
 {
-  // Subscribers
-  accelerometer_sub_ = create_subscription<Accelerometer>("sensors/accelerometer", 1);
-  angle_sub_ = create_subscription<Angle>("sensors/angle", 1);
-  gyroscope_sub_ = create_subscription<Gyroscope>("sensors/gyroscope", 1);
+  // Message filter subscribers
+  rclcpp::QoS qos(10);
+  auto rmw_qos_profile = qos.get_rmw_qos_profile();
+  accelerometer_sub_.subscribe(this, "sensors/accelerometer", rmw_qos_profile);
+  angle_sub_.subscribe(this, "sensors/angle", rmw_qos_profile);
+  gyroscope_sub_.subscribe(this, "sensors/gyroscope", rmw_qos_profile);
 
   // Publishers
   imu_pub_ = create_publisher<Imu>("imu", 10);
 
   // Synchronizer
-  synchronizer_ = message_filters::TimeSynchronizer<Accelerometer, Angle, Gyroscope>(
+  synchronizer_ = std::make_shared<message_filters::TimeSynchronizer<Accelerometer, Angle, Gyroscope>>(
     accelerometer_sub_, angle_sub_, gyroscope_sub_, 10);
-  synchronizer_.registerCallback(NaoInterfacesBridge::syncronizerCallback, this);
+  synchronizer_->registerCallback(&NaoInterfacesBridge::synchronizerCallback, this);
 }
 
 void NaoInterfacesBridge::synchronizerCallback(
@@ -46,3 +48,6 @@ void NaoInterfacesBridge::synchronizerCallback(
 }
 
 }  // namespace nao_interfaces_bridge
+
+#include "rclcpp_components/register_node_macro.hpp"
+RCLCPP_COMPONENTS_REGISTER_NODE(nao_interfaces_bridge::NaoInterfacesBridge)

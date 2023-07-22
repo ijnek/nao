@@ -15,6 +15,7 @@
 #ifndef NAO_INTERFACES_BRIDGE__NAO_INTERFACES_BRIDGE_HPP_
 #define NAO_INTERFACES_BRIDGE__NAO_INTERFACES_BRIDGE_HPP_
 
+#include "message_filters/subscriber.h"
 #include "message_filters/time_synchronizer.h"
 #include "nao_sensor_msgs/msg/accelerometer.hpp"
 #include "nao_sensor_msgs/msg/angle.hpp"
@@ -32,12 +33,22 @@ public:
 
 private:
   // Subscriptions
-  rclcpp::Subscription<nao_sensor_msgs::msg::Accelerometer>::SharedPtr accelerometer_sub_;
-  rclcpp::Subscription<nao_sensor_msgs::msg::Angle>::SharedPtr angle_sub_;
-  rclcpp::Subscription<nao_sensor_msgs::msg::Gyroscope>::SharedPtr gyroscope_sub_;
+  message_filters::Subscriber<nao_sensor_msgs::msg::Accelerometer> accelerometer_sub_;
+  message_filters::Subscriber<nao_sensor_msgs::msg::Angle> angle_sub_;
+  message_filters::Subscriber<nao_sensor_msgs::msg::Gyroscope> gyroscope_sub_;
 
   // Publishers
   rclcpp::Publisher<sensor_msgs::msg::Imu>::SharedPtr imu_pub_;
+
+  // Synchronizer
+  std::shared_ptr<message_filters::TimeSynchronizer<nao_sensor_msgs::msg::Accelerometer,
+    nao_sensor_msgs::msg::Angle, nao_sensor_msgs::msg::Gyroscope>> synchronizer_;
+
+  // Callbacks
+  void synchronizerCallback(
+    const nao_sensor_msgs::msg::Accelerometer::SharedPtr,
+    const nao_sensor_msgs::msg::Angle::SharedPtr,
+    const nao_sensor_msgs::msg::Gyroscope::SharedPtr);
 };
 
 }  // namespace nao_interfaces_bridge
