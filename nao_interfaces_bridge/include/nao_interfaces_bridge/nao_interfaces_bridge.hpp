@@ -15,6 +15,8 @@
 #ifndef NAO_INTERFACES_BRIDGE__NAO_INTERFACES_BRIDGE_HPP_
 #define NAO_INTERFACES_BRIDGE__NAO_INTERFACES_BRIDGE_HPP_
 
+#include <memory>
+
 #include "message_filters/subscriber.h"
 #include "message_filters/time_synchronizer.h"
 #include "nao_sensor_msgs/msg/accelerometer.hpp"
@@ -46,9 +48,9 @@ private:
 
   // Callbacks
   void synchronizerCallback(
-    const nao_sensor_msgs::msg::Accelerometer::SharedPtr& accelerometer,
-    const nao_sensor_msgs::msg::Angle::SharedPtr& angle,
-    const nao_sensor_msgs::msg::Gyroscope::SharedPtr& gyroscope);
+    const nao_sensor_msgs::msg::Accelerometer::SharedPtr & accelerometer,
+    const nao_sensor_msgs::msg::Angle::SharedPtr & angle,
+    const nao_sensor_msgs::msg::Gyroscope::SharedPtr & gyroscope);
 };
 
 }  // namespace nao_interfaces_bridge

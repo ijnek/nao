@@ -37,15 +37,16 @@ NaoInterfacesBridge::NaoInterfacesBridge(const rclcpp::NodeOptions & options)
   imu_pub_ = create_publisher<Imu>("imu", 10);
 
   // Synchronizer
-  synchronizer_ = std::make_shared<message_filters::TimeSynchronizer<Accelerometer, Angle, Gyroscope>>(
+  synchronizer_ =
+    std::make_shared<message_filters::TimeSynchronizer<Accelerometer, Angle, Gyroscope>>(
     accelerometer_sub_, angle_sub_, gyroscope_sub_, 10);
   synchronizer_->registerCallback(&NaoInterfacesBridge::synchronizerCallback, this);
 }
 
 void NaoInterfacesBridge::synchronizerCallback(
-  const Accelerometer::SharedPtr& accelerometer,
-  const Angle::SharedPtr& angle,
-  const Gyroscope::SharedPtr& gyroscope)
+  const Accelerometer::SharedPtr & accelerometer,
+  const Angle::SharedPtr & angle,
+  const Gyroscope::SharedPtr & gyroscope)
 {
   Imu imu;
   imu.header.frame_id = "ImuTorsoAccelerometer_frame";
