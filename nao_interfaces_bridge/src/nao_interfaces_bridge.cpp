@@ -34,7 +34,7 @@ NaoInterfacesBridge::NaoInterfacesBridge(const rclcpp::NodeOptions & options)
   gyroscope_sub_.subscribe(this, "sensors/gyroscope", rmw_qos_profile);
 
   // Publishers
-  imu_pub_ = create_publisher<Imu>("imu", 10);
+  imu_pub_ = create_publisher<Imu>("sensors/imu", 10);
 
   // Synchronizer
   synchronizer_ =
