@@ -46,9 +46,9 @@ private:
 
   // Callbacks
   void synchronizerCallback(
-    const nao_sensor_msgs::msg::Accelerometer::SharedPtr,
-    const nao_sensor_msgs::msg::Angle::SharedPtr,
-    const nao_sensor_msgs::msg::Gyroscope::SharedPtr);
+    const nao_sensor_msgs::msg::Accelerometer::SharedPtr& accelerometer,
+    const nao_sensor_msgs::msg::Angle::SharedPtr& angle,
+    const nao_sensor_msgs::msg::Gyroscope::SharedPtr& gyroscope);
 };
 
 }  // namespace nao_interfaces_bridge

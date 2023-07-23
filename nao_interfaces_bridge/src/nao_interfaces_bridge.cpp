@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "nao_interfaces_bridge/nao_interfaces_bridge.hpp"
+#include "tf2_geometry_msgs/tf2_geometry_msgs.hpp"
 
 namespace nao_interfaces_bridge
 {
@@ -42,9 +43,24 @@ NaoInterfacesBridge::NaoInterfacesBridge(const rclcpp::NodeOptions & options)
 }
 
 void NaoInterfacesBridge::synchronizerCallback(
-  const Accelerometer::SharedPtr, const Angle::SharedPtr, const Gyroscope::SharedPtr)
+  const Accelerometer::SharedPtr& accelerometer,
+  const Angle::SharedPtr& angle,
+  const Gyroscope::SharedPtr& gyroscope)
 {
-  imu_pub_->publish(Imu{});
+  Imu imu;
+  imu.header.frame_id = "ImuTorsoAccelerometer_frame";
+
+  // Linear Acceleration
+  imu.linear_acceleration.x = accelerometer->x;
+  imu.linear_acceleration.y = accelerometer->y;
+  imu.linear_acceleration.z = accelerometer->z;
+
+  // Angular Velocity
+  imu.angular_velocity.x = gyroscope->x;
+  imu.angular_velocity.y = gyroscope->y;
+  imu.angular_velocity.z = gyroscope->z;
+
+  imu_pub_->publish(imu);
 }
 
 }  // namespace nao_interfaces_bridge

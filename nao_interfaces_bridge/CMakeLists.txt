@@ -12,6 +12,7 @@ find_package(nao_sensor_msgs REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
 
 set(THIS_PACKAGE_INCLUDE_DEPENDS
   ament_cmake
@@ -19,7 +20,8 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
   nao_sensor_msgs
   rclcpp
   rclcpp_components
-  sensor_msgs)
+  sensor_msgs
+  tf2_geometry_msgs)
 
 # Build
 add_library(${PROJECT_NAME}_node SHARED
