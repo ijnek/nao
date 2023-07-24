@@ -20,7 +20,6 @@
 #include "message_filters/subscriber.h"
 #include "message_filters/time_synchronizer.h"
 #include "nao_sensor_msgs/msg/accelerometer.hpp"
-#include "nao_sensor_msgs/msg/angle.hpp"
 #include "nao_sensor_msgs/msg/gyroscope.hpp"
 #include "rclcpp/node.hpp"
 #include "sensor_msgs/msg/imu.hpp"
@@ -36,7 +35,6 @@ public:
 private:
   // Subscriptions
   message_filters::Subscriber<nao_sensor_msgs::msg::Accelerometer> accelerometer_sub_;
-  message_filters::Subscriber<nao_sensor_msgs::msg::Angle> angle_sub_;
   message_filters::Subscriber<nao_sensor_msgs::msg::Gyroscope> gyroscope_sub_;
 
   // Publishers
@@ -44,12 +42,11 @@ private:
 
   // Synchronizer
   std::shared_ptr<message_filters::TimeSynchronizer<nao_sensor_msgs::msg::Accelerometer,
-    nao_sensor_msgs::msg::Angle, nao_sensor_msgs::msg::Gyroscope>> synchronizer_;
+    nao_sensor_msgs::msg::Gyroscope>> synchronizer_;
 
   // Callbacks
   void synchronizerCallback(
     const nao_sensor_msgs::msg::Accelerometer::SharedPtr & accelerometer,
-    const nao_sensor_msgs::msg::Angle::SharedPtr & angle,
     const nao_sensor_msgs::msg::Gyroscope::SharedPtr & gyroscope);
 };
 

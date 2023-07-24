@@ -19,7 +19,6 @@ namespace nao_interfaces_bridge
 {
 
 using nao_sensor_msgs::msg::Accelerometer;
-using nao_sensor_msgs::msg::Angle;
 using nao_sensor_msgs::msg::Gyroscope;
 using sensor_msgs::msg::Imu;
 
@@ -30,7 +29,6 @@ NaoInterfacesBridge::NaoInterfacesBridge(const rclcpp::NodeOptions & options)
   rclcpp::QoS qos(10);
   auto rmw_qos_profile = qos.get_rmw_qos_profile();
   accelerometer_sub_.subscribe(this, "sensors/accelerometer", rmw_qos_profile);
-  angle_sub_.subscribe(this, "sensors/angle", rmw_qos_profile);
   gyroscope_sub_.subscribe(this, "sensors/gyroscope", rmw_qos_profile);
 
   // Publishers
@@ -38,14 +36,13 @@ NaoInterfacesBridge::NaoInterfacesBridge(const rclcpp::NodeOptions & options)
 
   // Synchronizer
   synchronizer_ =
-    std::make_shared<message_filters::TimeSynchronizer<Accelerometer, Angle, Gyroscope>>(
-    accelerometer_sub_, angle_sub_, gyroscope_sub_, 10);
+    std::make_shared<message_filters::TimeSynchronizer<Accelerometer, Gyroscope>>(
+    accelerometer_sub_, gyroscope_sub_, 10);
   synchronizer_->registerCallback(&NaoInterfacesBridge::synchronizerCallback, this);
 }
 
 void NaoInterfacesBridge::synchronizerCallback(
   const Accelerometer::SharedPtr & accelerometer,
-  const Angle::SharedPtr & angle,
   const Gyroscope::SharedPtr & gyroscope)
 {
   Imu imu;
