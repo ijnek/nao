@@ -19,8 +19,8 @@
 #include <utility>
 #include "robot_state_publisher/robot_state_publisher.hpp"
 #include "rclcpp/rclcpp.hpp"
-#include "nao_sensor_msgs/msg/joint_positions.hpp"
-#include "nao_sensor_msgs/msg/joint_indexes.hpp"
+#include "nao_lola_sensor_msgs/msg/joint_positions.hpp"
+#include "nao_lola_sensor_msgs/msg/joint_indexes.hpp"
 
 std::vector<std::string> joint_names = {
   "HeadYaw",
@@ -56,17 +56,17 @@ public:
   NaoStatePublisher()
   : robot_state_publisher::RobotStatePublisher(rclcpp::NodeOptions())
   {
-    subscriber_ = this->create_subscription<nao_sensor_msgs::msg::JointPositions>(
+    subscriber_ = this->create_subscription<nao_lola_sensor_msgs::msg::JointPositions>(
       "sensors/joint_positions", 10, std::bind(
         &NaoStatePublisher::callbackNaoJoints, this,
         std::placeholders::_1));
   }
 
 private:
-  void callbackNaoJoints(const nao_sensor_msgs::msg::JointPositions::SharedPtr sensor_joints)
+  void callbackNaoJoints(const nao_lola_sensor_msgs::msg::JointPositions::SharedPtr sensor_joints)
   {
     std::map<std::string, double> joint_positions;
-    for (unsigned i = 0; i < nao_sensor_msgs::msg::JointIndexes::NUMJOINTS; ++i) {
+    for (unsigned i = 0; i < nao_lola_sensor_msgs::msg::JointIndexes::NUMJOINTS; ++i) {
       joint_positions.insert({joint_names[i], sensor_joints->positions[i]});
     }
 
@@ -82,7 +82,7 @@ private:
     publishTransforms(joint_positions, now());
   }
 
-  rclcpp::Subscription<nao_sensor_msgs::msg::JointPositions>::SharedPtr subscriber_;
+  rclcpp::Subscription<nao_lola_sensor_msgs::msg::JointPositions>::SharedPtr subscriber_;
 };
 
 int main(int argc, char * argv[])
