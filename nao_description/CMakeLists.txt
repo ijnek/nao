@@ -15,11 +15,11 @@ if("$ENV{IGNORE_MESHES_AND_TEXTURE_DIRS}" STREQUAL "")
       "instructions.")
   endif()
 
-  # if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/texture)
+  if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/texture)
     message(FATAL_ERROR "Manual installation of textures is required. "
       "Please run ./src/nao/nao_description/install.sh in your workspace, and follow installation "
       "instructions.")
-  # endif()
+  endif()
 
   foreach(dir meshes texture)
     install(DIRECTORY ${dir}/
