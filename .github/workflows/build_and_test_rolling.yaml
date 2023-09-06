@@ -24,10 +24,6 @@ jobs:
     container:
       image: ubuntu:jammy
 
-    # Enable flag to ignore the absence of the meshes and texture directories, used in nao_description's CMakeLists.txt
-    env:
-      IGNORE_MESHES_AND_TEXTURE_DIRS: 1
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: ros-tooling/setup-ros@v0.7
@@ -36,3 +32,12 @@ jobs:
       - uses: ros-tooling/action-ros-ci@v0.3
         with:
           target-ros2-distro: rolling
+          # Enable flag to ignore the absence of the meshes and texture directories, used in nao_description's CMakeLists.txt
+          colcon-defaults: |
+            {
+              "build": {
+                "cmake-args": [
+                    "-DIGNORE_MESHES_AND_TEXTURE_DIRS=ON"
+                ]
+              }
+            }
