@@ -7,8 +7,8 @@ find_package(ament_cmake REQUIRED)
 install(DIRECTORY urdf/
   DESTINATION share/${PROJECT_NAME}/urdf/)
 
-# Use IGNORE_MESHES_AND_TEXTURE_DIRS flag to ignore these directories when using Github Actions CI
-if("$ENV{IGNORE_MESHES_AND_TEXTURE_DIRS}" STREQUAL "")
+# Set the IGNORE_MESHES_AND_TEXTURE_DIRS cmake flag to ignore these directories when using Github Actions CI
+if(NOT IGNORE_MESHES_AND_TEXTURE_DIRS)
   if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/meshes)
     message(FATAL_ERROR "Manual installation of meshes is required. "
       "Please run ./src/nao/nao_description/install.sh in your workspace, and follow installation "
