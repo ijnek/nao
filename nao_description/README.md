@@ -1,14 +1,5 @@
 # nao_description
 
-## Setup
-
-To install the 3d model meshes for the NAO, from your ROS workspace, run:
-
-
-    ./src/nao/nao_description/install.sh
-
-and step through the installation wizard.
-
 ## Using in a launch file
 
     file_path = os.path.join(
