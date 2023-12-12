@@ -20,5 +20,9 @@
 
   <export>
     <build_type>ament_cmake</build_type>
+    <deprecated>
+      Please use robot_state_publisher. nao_state_publisher will be removed in K-turtle.
+      Instructions are provided at https://ros2-nao.readthedocs.io/
+    </deprecated>
   </export>
 </package>
